@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
+/* Hide Next.js loading indicator */
+[data-next-mark-loading] {
+  display: none !important;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #FF4D4D;
+  --secondary: #1A1A1A;
+  --accent: #FFD700;
+  --text: #333333;
+  --light: #FFFFFF;
 }
 
 @theme inline {
@@ -20,7 +30,42 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--light);
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, var(--secondary), #2A2A2A);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

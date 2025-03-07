@@ -1,101 +1,227 @@
+'use client';
+
 import Image from "next/image";
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import StaticImage from '@/components/StaticImage';
+import { useState } from 'react';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({
+    loading: false,
+    success: false,
+    error: ''
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const mailtoLink = `mailto:getanim0@yahoo.com?subject=Contact Form Message from ${formData.name}&body=Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+    window.location.href = mailtoLink;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.id]: e.target.value
+    }));
+  };
+
+  return (
+    <div className="relative">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center gradient-bg text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <StaticImage
+            width={1920}
+            height={1080}
+            alt="Hero Background"
+            className="object-cover opacity-20"
+            category="hero"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        
+        <div className="container mx-auto px-4 z-10 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 gradient-text">
+          Strategic investing with a focus on growth and risk control
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-300">
+          "Driving smart investments, ensuring sustainable growth, and strategically managing risk for long-term financial success."
+          </p>
+          <button className="bg-[#FF4D4D] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all hover-scale">
+            Get Started
+          </button>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 gradient-text">About Me</h2>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="space-y-8">
+              <p className="text-base text-gray-700 leading-relaxed text-justify">
+                I am a seasoned Senior Investment Professional with over 15 years of experience in Operations and Investment across global markets. My expertise spans FX, Treasury, International Capital Markets, Risk Management, Policy Implementation, Structured Derivatives, Private Equity, and Financial Planning. With a strong foundation in qualitative and quantitative analysis, I specialize in crafting strategic investment solutions that balance growth and risk management.
+              </p>
+              <p className="text-base text-gray-700 leading-relaxed text-justify">
+                Throughout my career, I have successfully translated corporate vision into measurable results by leveraging people, processes, and technology. I have a proven ability to develop, manage, and optimize investment portfolios, ensuring maximum shareholder value while maintaining prudent risk controls.
+              </p>
+              <p className="text-base text-gray-700 leading-relaxed text-justify">
+                As a motivational leader and collaborative team player, I excel in decision-making, problem-solving, and effective communication. My results-driven mindset, combined with a strong corporate focus, enables me to drive business growth and create long-term financial success.
+              </p>
+            </div>
+            <div className="relative h-[500px] rounded-lg overflow-hidden hover-scale pt-0">
+              <StaticImage
+                width={400}
+                height={600}
+                alt="Investment Professional"
+                className="object-cover"
+                category="about"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-20 bg-gradient-to-br from-teal-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 gradient-text">Our Services</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-lg hover-scale">
+                <div className="relative h-48 mb-6 rounded-lg overflow-hidden">
+                  <StaticImage
+                    width={400}
+                    height={300}
+                    alt={service.title}
+                    className="object-cover"
+                    category={service.imageCategory}
+                  />
+                </div>
+                <div className="w-12 h-12 bg-[#FF4D4D] text-white rounded-full flex items-center justify-center mb-4">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                <p className="text-gray-600">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio Section */}
+      <section id="portfolio" className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12 gradient-text">Investment Success Stories</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Market Growth Strategy",
+                image: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&h=600&fit=crop&q=80"
+              },
+              {
+                title: "Risk Management Success",
+                image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&h=600&fit=crop&q=80"
+              },
+              {
+                title: "Portfolio Optimization",
+                image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop&q=80"
+              }
+            ].map((item, index) => (
+              <div key={index} className="relative h-64 rounded-lg overflow-hidden hover-scale">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={800}
+                  height={600}
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 gradient-bg text-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">Get in Touch</h2>
+          <div className="max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-[#FF4D4D]"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-[#FF4D4D]"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block mb-2">Message</label>
+                <textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={4}
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-[#FF4D4D]"
+                ></textarea>
+              </div>
+              <p className="text-sm text-gray-300">Clicking "Send Message" will open your email client to send the message.</p>
+              <button
+                type="submit"
+                className="w-full bg-[#FF4D4D] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all hover-scale"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }
+
+const services = [
+  {
+    title: "Investment Management",
+    description: "Strategic portfolio management and investment solutions tailored to your financial goals.",
+    icon: "📈",
+    imageCategory: "hero" as const
+  },
+  {
+    title: "Market Analysis",
+    description: "Comprehensive market research and trend analysis for informed investment decisions.",
+    icon: "📊",
+    imageCategory: "about" as const
+  },
+  {
+    title: "Risk Management",
+    description: "Expert risk assessment and mitigation strategies to protect your investments.",
+    icon: "🛡️",
+    imageCategory: "portfolio" as const
+  }
+];
