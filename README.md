@@ -116,6 +116,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
+Your Name - 
 
 Project Link: [https://github.com/khurramsaadat/Portfolio-Manager-TAIMUR](https://github.com/khurramsaadat/Portfolio-Manager-TAIMUR)
+
+NEXT_USE_NETLIFY_EDGE=true
+NODE_VERSION=18

@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  output: 'export',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -13,9 +14,12 @@ const nextConfig = {
         hostname: 'images.pexels.com',
         pathname: '/photos/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      }
     ],
-    unoptimized: true, // This allows using local images
-    domains: ['images.pexels.com', 'images.unsplash.com'],
   },
   // Disable the loading indicator
   loading: false,
